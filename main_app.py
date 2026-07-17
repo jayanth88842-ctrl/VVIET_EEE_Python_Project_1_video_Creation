@@ -88,8 +88,9 @@ def create_video(image_files, duplicate_count, fps, audio_path):
     final_clip = final_video.with_audio(audio_clip)
     
     output_filename = "output_video.mp4"
-
-  # --- 3. STREAMLIT UI LOGIC ---
+    final_clip.write_videofile(output_filename, codec="libx264", audio_codec="aac")
+    return output_filename
+    # --- 3. STREAMLIT UI LOGIC ---
 
 st.set_page_config(page_title="PragyanAI Video Creator", layout="wide")
 
@@ -165,6 +166,4 @@ if st.button("🚀 Create & Play Video", use_container_width=True):
             st.error(f"An error occurred: {e}")
     else:
         st.warning("Please ensure images are uploaded and audio is 'Loaded and Ready'.")
-    final_clip.write_videofile(output_filename, codec="libx264", audio_codec="aac")
-    return output_filename
-  
+    
